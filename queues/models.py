@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
+from django.forms import ValidationError
 from accounts.models import User
 
 class ServiceQueue(models.Model):
@@ -17,5 +18,13 @@ class QueueEntry(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='waiting')
     joined_at = models.DateTimeField(auto_now_add=True)
 
+    def clean(self):
+        if self.position < 1:
+            raise ValidationError("Queue position cannot be less than 1.")
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
+        
     class Meta:
         ordering = ['position']

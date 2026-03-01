@@ -7,6 +7,9 @@ class ServiceQueueSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class QueueEntrySerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+
     class Meta:
         model = QueueEntry
-        fields = '__all__'
+        fields = ['id', 'queue', 'user', 'username', 'position', 'status', 'created_at']
+        read_only_fields = ['position', 'status', 'created_at', 'username']

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'accounts',
     'queues',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,20 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'queue_api.wsgi.application'
+ASGI_APPLICATION = 'queue_api.asgi.application'
+
+# Redis channel layer
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
+}
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
 
 
 # Database
