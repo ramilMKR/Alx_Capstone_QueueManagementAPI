@@ -17,9 +17,26 @@ class QueueListView(APIView):
 
     def get(self, request):
         queues = ServiceQueue.objects.all()
-        serializer = ServiceQueueSerializer(queues, many=True)
-        return Response(serializer.data)
 
+        if request.user.is_staff:
+            data = []
+            for queue in queues:
+                entries = QueueEntry.objects.filter(queue=queue).order_by('position')
+                queue_data = {
+                    "id": queue.id,
+                    "name": queue.name,
+                    "description": queue.description,
+                    "is_active": queue.is_active,
+                    "entries": QueueEntrySerializer(entries, many=True).data
+                }
+                data.append(queue_data)
+            return Response(data)
+        else:
+            serializer = ServiceQueueSerializer(queues, many=True)
+            
+            for queue in serializer.data:
+                queue.pop("entries", None)
+            return Response(serializer.data)
 
 # Create queue (admin only)
 class QueueCreateView(APIView):
@@ -34,7 +51,34 @@ class QueueCreateView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+from rest_framework.permissions import IsAdminUser
 
+# Show queues details (admin only)
+class AdminQueueView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        queues = ServiceQueue.objects.prefetch_related('entries__user').all()
+        data = []
+        for queue in queues:
+            queue_data = {
+                "id": queue.id,
+                "name": queue.name,
+                "description": queue.description,
+                "is_active": queue.is_active,
+                "entries": [
+                    {
+                        "user_id": entry.user.id,
+                        "username": entry.user.username,
+                        "status": entry.status,
+                        "position": entry.position,
+                        "joined_at": entry.created_at
+                    } for entry in queue.entries.all().order_by('position')
+                ]
+            }
+            data.append(queue_data)
+        return Response(data)
+    
 # Join queue
 class JoinQueueView(APIView):
     permission_classes = [IsAuthenticated]

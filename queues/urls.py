@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    QueueListView, QueueCreateView,
+    AdminQueueView, QueueListView, QueueCreateView,
     JoinQueueView, LeaveQueueView,
     MyPositionView, NextInQueueView
 )
@@ -12,4 +12,5 @@ urlpatterns = [
     path('queues/<int:queue_id>/leave/', LeaveQueueView.as_view(), name='queue-leave'),
     path('my-position/', MyPositionView.as_view(), name='my-position'),
     path('queues/<int:queue_id>/next/', NextInQueueView.as_view(), name='queue-next'),
+    path('queues/', AdminQueueView.as_view(), name='admin-queues'),
 ]
