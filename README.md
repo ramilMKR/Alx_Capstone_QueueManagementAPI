@@ -49,32 +49,32 @@ Development Tools:
 
 
 ## Project Structure
-
-```queue_api/
-```│
-```├── accounts/
-```│ ├── models.py
-```│ ├── serializers.py
-```│ ├── views.py
-```│ └── urls.py
-```│
-```├── queues/
-```│ ├── models.py
-```│ ├── serializers.py
-```│ ├── views.py
-```│ ├── routing.py
-```│ ├── consumers.py
-```│ └── tasks.py
-```│
-```├── queue_api/
-```│ ├── settings.py
-```│ ├── urls.py
+```
+queue_api/
+│
+├── accounts/
+│ ├── models.py
+│ ├── serializers.py
+│ ├── views.py
+│ └── urls.py
+│
+├── queues/
+│ ├── models.py
+│ ├── serializers.py
+│ ├── views.py
+│ ├── routing.py
+│ ├── consumers.py
+│ └── tasks.py
+│
+├── queue_api/
+│ ├── settings.py
+│ ├── urls.py
 │ └── asgi.py
 │
 ├── manage.py
 ├── db.sqlite3
 └── README.md
-
+```
 
 ## Installation
 
