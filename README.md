@@ -50,25 +50,25 @@ Development Tools:
 
 ## Project Structure
 
-queue_api/
-│
-├── accounts/
-│ ├── models.py
-│ ├── serializers.py
-│ ├── views.py
-│ └── urls.py
-│
-├── queues/
-│ ├── models.py
-│ ├── serializers.py
-│ ├── views.py
-│ ├── routing.py
-│ ├── consumers.py
-│ └── tasks.py
-│
-├── queue_api/
-│ ├── settings.py
-│ ├── urls.py
+```queue_api/
+```│
+```├── accounts/
+```│ ├── models.py
+```│ ├── serializers.py
+```│ ├── views.py
+```│ └── urls.py
+```│
+```├── queues/
+```│ ├── models.py
+```│ ├── serializers.py
+```│ ├── views.py
+```│ ├── routing.py
+```│ ├── consumers.py
+```│ └── tasks.py
+```│
+```├── queue_api/
+```│ ├── settings.py
+```│ ├── urls.py
 │ └── asgi.py
 │
 ├── manage.py
@@ -119,35 +119,35 @@ API will run at:
 
 ## API Endpoints
 
-# Register a user
+1. Register a user
 
 POST /api/register/
 
-# Login and receive JWT token
+2. Login and receive JWT token
 
 POST /api/login/
 
-# Get all queues
+3. Get all queues
 
 GET /api/queues/
 
-# Create queue (Admin only)
+4. Create queue (Admin only)
 
 POST /api/queues/create/
 
-# Join queue
+5. Join queue
 
 POST /api/queues/{queue_id}/join/
 
-# Leave queue
+6. Leave queue
 
 POST /api/queues/{queue_id}/leave/
 
-# Check your position
+7. Check your position
 
 GET /api/my-position/
 
-# Serve next user in queue (Admin)
+8. Serve next user in queue (Admin)
 
 POST /api/queues/{queue_id}/next/
 
