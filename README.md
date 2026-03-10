@@ -119,35 +119,35 @@ API will run at:
 
 ## API Endpoints
 
-1. Register a user
+### 1. Register a user
 
 POST /api/register/
 
-2. Login and receive JWT token
+### 2. Login and receive JWT token
 
 POST /api/login/
 
-3. Get all queues
+### 3. Get all queues
 
 GET /api/queues/
 
-4. Create queue (Admin only)
+### 4. Create queue (Admin only)
 
 POST /api/queues/create/
 
-5. Join queue
+### 5. Join queue
 
 POST /api/queues/{queue_id}/join/
 
-6. Leave queue
+### 6. Leave queue
 
 POST /api/queues/{queue_id}/leave/
 
-7. Check your position
+### 7. Check your position
 
 GET /api/my-position/
 
-8. Serve next user in queue (Admin)
+### 8. Serve next user in queue (Admin)
 
 POST /api/queues/{queue_id}/next/
 
